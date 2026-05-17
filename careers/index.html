@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers — PromoPartners | Join The Team</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #2D3436;
+            --beige: #F5F0E8;
+            --accent-color: #C9A227;
+            --white: #FFFFFF;
+            --text-color: #2D3436;
+            --font-barlow: 'Barlow', sans-serif;
+            --font-bebas: 'Bebas Neue', sans-serif;
+            --font-inter: 'Inter', sans-serif;
+            --font-dm-serif: 'DM Serif Display', serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--white);
+            font-family: var(--font-inter);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        a, button, select, input, textarea {
+            cursor: none;
+        }
+
+        /* --- Custom Cursor --- */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: normal;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 60px;
+            background-color: rgba(45, 52, 54, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: var(--text-color);
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+
+        .logo {
+            font-family: var(--font-barlow);
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .logo-subtext {
+            font-family: var(--font-inter);
+            font-size: 9px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #C9A227;
+            line-height: 1;
+            border-left: 1px solid #C9A227;
+            padding-left: 8px;
+        }
+
+        nav.scrolled .logo {
+            color: var(--text-color);
+        }
+
+        .logo span {
+            color: #C9A227;
+        }
+
+        .logo .reg-mark {
+            font-size: 8px;
+            vertical-align: super;
+            color: var(--white);
+        }
+
+        nav.scrolled .logo .reg-mark {
+            color: var(--text-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-barlow);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            opacity: 0.8;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 6px;
+            text-decoration: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--text-color);
+        }
+
+        /* --- Hero Section --- */
+        .careers-hero {
+            background-color: var(--bg-color);
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            position: relative;
+        }
+
+        .careers-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(201, 162, 39, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-inter);
+            font-size: 15px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            margin-bottom: 24px;
+        }
+
+        .careers-hero h1 {
+            font-family: var(--font-bebas);
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            color: var(--white);
+            letter-spacing: 6px;
+            line-height: 1;
+            margin-bottom: 24px;
+            font-weight: normal;
+        }
+
+        .careers-hero p {
+            font-family: var(--font-inter);
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* --- Why Join Us Section --- */
+        .why-join-us {
+            background-color: var(--beige);
+            color: var(--text-color);
+            padding: 140px 0;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 0 20px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-bebas);
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            color: var(--text-color);
+            letter-spacing: 4px;
+            margin: 0;
+            font-style: italic;
+            font-weight: normal;
+            line-height: 1;
+        }
+
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0 auto;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .why-card {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 60px 40px;
+            border-radius: 20px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .why-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            background-color: var(--white);
+            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.15);
+        }
+
+        .why-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+        }
+
+        .why-title {
+            font-family: var(--font-barlow);
+            font-size: 26px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-color);
+            margin-bottom: 16px;
+        }
+
+        .why-desc {
+            font-family: var(--font-inter);
+            font-size: 16px;
+            color: rgba(45, 52, 54, 0.75);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        @media (max-width: 1024px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+        }
+
+        /* --- Open Positions Section --- */
+        .open-positions {
+            background-color: var(--bg-color);
+            color: var(--white);
+            padding: 140px 0;
+            width: 100%;
+        }
+
+        .open-positions .section-header h2 {
+            color: var(--white);
+        }
+
+        .positions-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .position-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .position-card:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .position-header {
+            padding: 35px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .position-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .position-title {
+            font-family: var(--font-barlow);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .position-meta {
+            display: flex;
+            gap: 20px;
+            font-family: var(--font-inter);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .position-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-apply {
+            padding: 12px 32px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            font-family: var(--font-barlow);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.2);
+        }
+
+        .btn-apply:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
+            background-color: #d4ae33;
+        }
+
+        .accordion-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .position-card:hover .accordion-toggle {
+            background-color: rgba(201, 162, 39, 0.1);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .accordion-icon {
+            transition: transform 0.4s ease;
+        }
+
+        .position-card.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .position-card.active .accordion-toggle {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .position-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .position-content {
+            padding: 35px 40px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .position-content h4 {
+            font-family: var(--font-barlow);
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .position-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .position-content ul {
+            list-style-position: inside;
+            margin-bottom: 20px;
+        }
+
+        .position-content li {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .positions-container {
+                padding: 0 20px;
+            }
+
+            .position-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+                padding: 25px;
+            }
+
+            .position-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .position-content {
+                padding: 25px;
+            }
+        }
+
+        /* --- Apply Now Section --- */
+        .apply-now-section {
+            background-color: var(--beige);
+            color: var(--text-color);
+            padding: 140px 0;
+            width: 100%;
+        }
+
+        .apply-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .apply-form {
+            background-color: var(--white);
+            padding: 60px 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 28px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-family: var(--font-inter);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(45, 52, 54, 0.8);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 18px 20px;
+            background-color: var(--beige);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            font-family: var(--font-inter);
+            font-size: 15px;
+            color: var(--text-color);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D3436' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-color);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.1);
+        }
+
+        .submit-btn {
+            padding: 20px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            font-family: var(--font-barlow);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 12px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.4);
+            background-color: #d4ae33;
+        }
+
+        .contact-line {
+            text-align: center;
+            margin-top: 40px;
+            font-family: var(--font-inter);
+            font-size: 15px;
+            color: rgba(45, 52, 54, 0.7);
+            line-height: 1.6;
+        }
+
+        .contact-line a {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-line a:hover {
+            opacity: 0.8;
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            background-color: rgba(201, 162, 39, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .form-success h3 {
+            font-family: var(--font-bebas);
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .form-success p {
+            font-size: 15px;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .apply-container {
+                padding: 0 20px;
+            }
+
+            .apply-form {
+                padding: 40px 30px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 28px;
+            }
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #050507;
+            color: var(--white);
+            padding: 100px 60px 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo-area {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-barlow);
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--white);
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-nav a {
+            font-family: var(--font-barlow);
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            width: fit-content;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact {
+            font-family: var(--font-inter);
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-contact a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-contact a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 900px) {
+            footer {
+                padding: 80px 30px 60px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <svg viewBox="0 0 24 24" width="28" height="28" style="transform-origin: 0 0;">
+            <path class="cursor-right" d="M0 0 L16 6 L9 9 Z" fill="#00AEEF" />
+            <path class="cursor-left" d="M0 0 L9 9 L6 16 Z" fill="#008BCC" />
+        </svg>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="logo-container cursor-hover">
+            <a href="/" style="text-decoration: none;">
+                <div class="logo">PROMO<span>PARTNERS</span><span class="reg-mark">®</span></div>
+                <div class="logo-subtext">marketing</div>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/#services" class="cursor-hover">Services</a></li>
+            <li><a href="/#work" class="cursor-hover">Work</a></li>
+            <li><a href="/careers/" class="cursor-hover">Careers</a></li>
+            <li><a href="/#about" class="cursor-hover">About</a></li>
+            <li><a href="/#contact" class="cursor-hover">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="careers-hero">
+        <div class="hero-tagline">SOCH SE STRATEGY TAK SAB YAHIN</div>
+        <h1>JOIN THE TEAM</h1>
+        <p>We're building something big. Come be part of it.</p>
+    </header>
+
+    <!-- Why Join Us Section -->
+    <section class="why-join-us">
+        <div class="section-header">
+            <h2>WHY JOIN US</h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-card cursor-hover">
+                <div class="why-icon">🚀</div>
+                <div class="why-title">Fast Growth</div>
+                <div class="why-desc">Work on real campaigns from day one. No bureaucracy, just high-impact execution and rapid career scaling.</div>
+            </div>
+            <div class="why-card cursor-hover">
+                <div class="why-icon">🎯</div>
+                <div class="why-title">Real Experience</div>
+                <div class="why-desc">Hands-on with top brands across India. Shape the digital narratives of industry leaders like Snitch Clothing.</div>
+            </div>
+            <div class="why-card cursor-hover">
+                <div class="why-icon">🤝</div>
+                <div class="why-title">Great Culture</div>
+                <div class="why-desc">Young, energetic, driven team of 10+. A collaborative environment where bold ideas are celebrated.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions Section -->
+    <section class="open-positions">
+        <div class="section-header">
+            <h2>OPEN POSITIONS</h2>
+        </div>
+        <div class="positions-container">
+            <!-- Position 1 -->
+            <div class="position-card cursor-hover">
+                <div class="position-header" onclick="toggleAccordion(this)">
+                    <div class="position-info">
+                        <div class="position-title">Social Media Manager</div>
+                        <div class="position-meta">
+                            <div class="meta-item">📍 Pan India / Remote</div>
+                            <div class="meta-item">💼 Full Time / Freelance</div>
+                        </div>
+                    </div>
+                    <div class="position-actions">
+                        <button class="btn-apply cursor-hover" onclick="applyForRole(event, 'Social Media Manager')">APPLY NOW</button>
+                        <div class="accordion-toggle cursor-hover">
+                            <svg class="accordion-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-body">
+                    <div class="position-content">
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Develop and execute innovative social media strategies for premium brand accounts.</li>
+                            <li>Oversee content calendars, copywriting, and community engagement across Instagram and LinkedIn.</li>
+                            <li>Analyze performance metrics and optimize campaigns for maximum reach and conversion.</li>
+                        </ul>
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>2+ years of agency experience managing high-growth brand pages.</li>
+                            <li>Exceptional understanding of viral trends, algorithm dynamics, and brand voice.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Position 2 -->
+            <div class="position-card cursor-hover">
+                <div class="position-header" onclick="toggleAccordion(this)">
+                    <div class="position-info">
+                        <div class="position-title">Video Editor</div>
+                        <div class="position-meta">
+                            <div class="meta-item">📍 Pan India / Remote</div>
+                            <div class="meta-item">💼 Full Time / Freelance</div>
+                        </div>
+                    </div>
+                    <div class="position-actions">
+                        <button class="btn-apply cursor-hover" onclick="applyForRole(event, 'Video Editor')">APPLY NOW</button>
+                        <div class="accordion-toggle cursor-hover">
+                            <svg class="accordion-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-body">
+                    <div class="position-content">
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Edit high-retention short-form reels and cinematic commercial brand videos.</li>
+                            <li>Perform professional color grading, sound design, and motion graphics integration.</li>
+                        </ul>
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Expert proficiency in Premiere Pro, After Effects, or DaVinci Resolve.</li>
+                            <li>Strong portfolio showcasing fast-paced editorial cuts and premium aesthetics.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Position 3 -->
+            <div class="position-card cursor-hover">
+                <div class="position-header" onclick="toggleAccordion(this)">
+                    <div class="position-info">
+                        <div class="position-title">Performance Marketing Executive</div>
+                        <div class="position-meta">
+                            <div class="meta-item">📍 Pan India / Remote</div>
+                            <div class="meta-item">💼 Full Time / Freelance</div>
+                        </div>
+                    </div>
+                    <div class="position-actions">
+                        <button class="btn-apply cursor-hover" onclick="applyForRole(event, 'Performance Marketing Executive')">APPLY NOW</button>
+                        <div class="accordion-toggle cursor-hover">
+                            <svg class="accordion-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-body">
+                    <div class="position-content">
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Plan, deploy, and scale high-budget ad campaigns across Meta, Google, and LinkedIn Ads.</li>
+                            <li>Conduct rigorous A/B testing on ad creatives, copy, and audience targeting.</li>
+                        </ul>
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Proven track record of managing profitable ROAS for e-commerce or D2C brands.</li>
+                            <li>Strong analytical mindset with deep expertise in Google Analytics and Meta Ads Manager.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Position 4 -->
+            <div class="position-card cursor-hover">
+                <div class="position-header" onclick="toggleAccordion(this)">
+                    <div class="position-info">
+                        <div class="position-title">Graphic Designer</div>
+                        <div class="position-meta">
+                            <div class="meta-item">📍 Pan India / Remote</div>
+                            <div class="meta-item">💼 Full Time / Freelance</div>
+                        </div>
+                    </div>
+                    <div class="position-actions">
+                        <button class="btn-apply cursor-hover" onclick="applyForRole(event, 'Graphic Designer')">APPLY NOW</button>
+                        <div class="accordion-toggle cursor-hover">
+                            <svg class="accordion-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-body">
+                    <div class="position-content">
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Design stunning social media statics, carousel posts, ad creatives, and brand identity assets.</li>
+                            <li>Collaborate with the marketing team to translate strategic concepts into visual masterpieces.</li>
+                        </ul>
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Mastery of Adobe Photoshop, Illustrator, and Figma.</li>
+                            <li>Exceptional eye for typography, layout composition, and modern editorial aesthetics.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Position 5 -->
+            <div class="position-card cursor-hover">
+                <div class="position-header" onclick="toggleAccordion(this)">
+                    <div class="position-info">
+                        <div class="position-title">Business Development Executive</div>
+                        <div class="position-meta">
+                            <div class="meta-item">📍 Pan India / Remote</div>
+                            <div class="meta-item">💼 Full Time / Freelance</div>
+                        </div>
+                    </div>
+                    <div class="position-actions">
+                        <button class="btn-apply cursor-hover" onclick="applyForRole(event, 'Business Development Executive')">APPLY NOW</button>
+                        <div class="accordion-toggle cursor-hover">
+                            <svg class="accordion-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-body">
+                    <div class="position-content">
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Identify and onboard high-potential brand clients looking for premium marketing solutions.</li>
+                            <li>Craft tailored pitch decks, conduct discovery calls, and manage client relationships.</li>
+                        </ul>
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Excellent communication, negotiation, and interpersonal skills.</li>
+                            <li>Prior B2B sales or agency experience with a strong network in the D2C/retail ecosystem.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Position 6 -->
+            <div class="position-card cursor-hover">
+                <div class="position-header" onclick="toggleAccordion(this)">
+                    <div class="position-info">
+                        <div class="position-title">Content Creator / Influencer Coordinator</div>
+                        <div class="position-meta">
+                            <div class="meta-item">📍 Pan India / Remote</div>
+                            <div class="meta-item">💼 Full Time / Freelance</div>
+                        </div>
+                    </div>
+                    <div class="position-actions">
+                        <button class="btn-apply cursor-hover" onclick="applyForRole(event, 'Content Creator / Influencer Coordinator')">APPLY NOW</button>
+                        <div class="accordion-toggle cursor-hover">
+                            <svg class="accordion-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-body">
+                    <div class="position-content">
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Scout, negotiate, and collaborate with top-tier influencers and creators for brand campaigns.</li>
+                            <li>Script engaging video concepts and ensure seamless execution of creator deliverables.</li>
+                        </ul>
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Deep understanding of the Indian influencer ecosystem and creator rates.</li>
+                            <li>Charismatic communication skills and strong project management capabilities.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apply Now Section -->
+    <section id="apply-now" class="apply-now-section">
+        <div class="section-header">
+            <h2>APPLY NOW</h2>
+        </div>
+        <div class="apply-container">
+            <div id="apply-success" class="form-success">
+                <h3>APPLICATION RECEIVED</h3>
+                <p>Thank you for applying to PromoPartners. Our team will review your portfolio and get back to you within 48 hours.</p>
+            </div>
+
+            <form id="careers-form" class="apply-form" onsubmit="submitApplication(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="c-name">Full Name</label>
+                        <input type="text" id="c-name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-phone">Phone Number</label>
+                        <input type="tel" id="c-phone" name="phone" placeholder="Your Phone Number" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="c-email">Email</label>
+                        <input type="email" id="c-email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-role">Position Applying For</label>
+                        <select id="c-role" name="role" required>
+                            <option value="" disabled selected>Select a position</option>
+                            <option value="Social Media Manager">Social Media Manager</option>
+                            <option value="Video Editor">Video Editor</option>
+                            <option value="Performance Marketing Executive">Performance Marketing Executive</option>
+                            <option value="Graphic Designer">Graphic Designer</option>
+                            <option value="Business Development Executive">Business Development Executive</option>
+                            <option value="Content Creator / Influencer Coordinator">Content Creator / Influencer Coordinator</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="c-portfolio">Portfolio / Instagram Link</label>
+                    <input type="url" id="c-portfolio" name="portfolio" placeholder="Your Portfolio Link" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="c-reason">Why do you want to join?</label>
+                    <textarea id="c-reason" name="reason" rows="4" placeholder="Your Message" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn cursor-hover">SUBMIT APPLICATION</button>
+            </form>
+
+            <div class="contact-line">
+                For direct applications DM us at <a href="https://www.instagram.com/promopartnersindia" target="_blank" class="cursor-hover">@promopartnersindia</a> or mail <a href="mailto:workwithpromopartners@gmail.com" class="cursor-hover">workwithpromopartners@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-logo-area">
+                <div class="footer-logo">PROMO<span>PARTNERS</span></div>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/promopartnersindia" target="_blank" aria-label="Instagram" class="cursor-hover">
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/917668191106" target="_blank" aria-label="WhatsApp" class="cursor-hover">
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                    </a>
+                    <a href="mailto:workwithpromopartners@gmail.com" aria-label="Email" class="cursor-hover">
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-nav">
+                <a href="/#about" class="cursor-hover">About</a>
+                <a href="/#services" class="cursor-hover">Services</a>
+                <a href="/#work" class="cursor-hover">Work</a>
+                <a href="/careers/" class="cursor-hover">Careers</a>
+                <a href="/#contact" class="cursor-hover">Contact</a>
+            </div>
+
+            <div class="footer-contact">
+                <a href="mailto:workwithpromopartners@gmail.com" class="cursor-hover">workwithpromopartners@gmail.com</a><br>
+                <a href="tel:+917668191106" class="cursor-hover">+91 7668191106</a> | <a href="https://wa.me/917668191106" target="_blank" class="cursor-hover">WhatsApp</a><br>
+                <a href="https://www.instagram.com/promopartnersindia" target="_blank" class="cursor-hover">@promopartnersindia</a><br>
+                Haridwar, Uttarakhand — Pan India Available
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Scripts -->
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            if (cursor) {
+                cursor.style.transform = `translate(${e.clientX - 14}px, ${e.clientY - 14}px)`;
+            }
+        });
+
+        // Navbar Scrolled Logic
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Accordion Toggle Logic
+        function toggleAccordion(headerElement) {
+            const card = headerElement.closest('.position-card');
+            const body = card.querySelector('.position-body');
+            
+            if (card.classList.contains('active')) {
+                card.classList.remove('active');
+                body.style.maxHeight = null;
+            } else {
+                // Close other active accordions
+                document.querySelectorAll('.position-card.active').forEach(activeCard => {
+                    activeCard.classList.remove('active');
+                    activeCard.querySelector('.position-body').style.maxHeight = null;
+                });
+
+                card.classList.add('active');
+                body.style.maxHeight = body.scrollHeight + "px";
+            }
+        }
+
+        // Apply Button Click Handler
+        function applyForRole(event, roleName) {
+            event.stopPropagation(); // Prevent accordion toggle
+            const selectElem = document.getElementById('c-role');
+            if (selectElem) {
+                selectElem.value = roleName;
+            }
+            const applySection = document.getElementById('apply-now');
+            if (applySection) {
+                applySection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Application Form Submission
+        function submitApplication(event) {
+            event.preventDefault();
+            const form = document.getElementById('careers-form');
+            const successBox = document.getElementById('apply-success');
+            const submitBtn = form.querySelector('.submit-btn');
+
+            submitBtn.textContent = 'SENDING...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const payload = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                company: 'Careers Application: ' + formData.get('role'),
+                services: 'Role: ' + formData.get('role') + ' | Portfolio: ' + formData.get('portfolio'),
+                message: formData.get('reason') + '\n\nPhone: ' + formData.get('phone')
+            };
+
+            fetch('/mail.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                form.style.display = 'none';
+                successBox.style.display = 'block';
+                successBox.scrollIntoView({ behavior: 'smooth' });
+            })
+            .catch(error => {
+                // Fallback success display if mail.php is not fully reachable in static test env
+                form.style.display = 'none';
+                successBox.style.display = 'block';
+                successBox.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+
+</html>

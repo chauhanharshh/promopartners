@@ -400,13 +400,6 @@ new_html = '''<section id="about-intro" class="about-intro">
             We don't just run ads; we craft narratives that resonate. PromoPartners is a premium agency dedicated to building brand equity through high-impact promotions, immersive events, and strategic media outreach.
         </p>
         
-        <div class="media-logos">
-            <div class="media-logo">VOGUE</div>
-            <div class="media-logo">COSMOPOLITAN</div>
-            <div class="media-logo">FORBES</div>
-            <div class="media-logo">BUSINESS INSIDER</div>
-        </div>
-
         <div class="intro-images">
             <img src="https://images.unsplash.com/photo-1558522195-e1201b090344?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-portrait" alt="Editorial Portrait">
             <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" class="img-landscape" alt="Editorial Landscape">
@@ -444,8 +437,8 @@ new_html = '''<section id="about-intro" class="about-intro">
                 <div class=\"photo-overlay\">Eclipse</div>
             </div>
             <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1475721025505-1175af40a7dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Zenith</div>
+                <img src=\"https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
+                <div class=\"photo-overlay\">Brand Campaign</div>
             </div>
             <div class=\"photo-item\">
                 <img src=\"https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
@@ -520,9 +513,9 @@ new_html = '''<section id="about-intro" class="about-intro">
             </div>
             
             <div class="footer-contact">
-                hello@promopartners.com<br>
-                +1 (555) 123-4567<br>
-                New York & Los Angeles
+                workwithpromopartners@gmail.com<br>
+                +91 7668191106<br>
+                Haridwar, Uttarakhand
             </div>
         </div>
     </footer>'''
