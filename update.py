@@ -408,45 +408,49 @@ new_html = '''<section id="about-intro" class="about-intro">
 
     <section id="photo-grid" class="photo-grid-section">
         <div class="photo-grid">
+            <!-- Column 1 (Spans all 3 rows) -->
+            <div class="photo-item tall-col tall-col-1">
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024997/p13_urzmhq.jpg" alt="Campaign Moment">
+            </div>
+            <!-- Column 2 (Spans all 3 rows) -->
+            <div class="photo-item tall-col tall-col-2">
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024996/p9_omhzbr.jpg" alt="Campaign Moment">
+            </div>
+
+            <!-- Columns 3, 4, 5 (Row 1) -->
             <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Work">
-                <div class="photo-overlay">Aura Lifestyle</div>
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024996/p11_e7tipz.jpg" alt="Campaign Moment">
             </div>
             <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Work">
-                <div class="photo-overlay">Velvet & Co.</div>
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024996/p1_gczosc.jpg" alt="Campaign Moment">
             </div>
             <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Work">
-                <div class="photo-overlay">Nexus Tech</div>
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024996/p10_qiy29h.jpg" alt="Campaign Moment">
             </div>
-            <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Luxe Haven</div>
+
+            <!-- Columns 3, 4, 5 (Row 2) -->
+            <!-- Center Typographic Cell (Row 2, Column 3) -->
+            <div class="photo-item center-text-cell">
+                <div class="line1">some of the most</div>
+                <div class="line2">"ICONIC"</div>
+                <div class="line3">campaign moments</div>
             </div>
-            <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Prism Events</div>
+            <div class="photo-item">
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024995/p6_zfre9d.jpg" alt="Campaign Moment">
             </div>
-            <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1558522195-e1201b090344?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Orbit Digital</div>
+            <div class="photo-item">
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024995/p4_ywhkuk.jpg" alt="Campaign Moment">
             </div>
-            <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Eclipse</div>
+
+            <!-- Columns 3, 4, 5 (Row 3) -->
+            <div class="photo-item">
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024995/p3_zu700f.jpg" alt="Campaign Moment">
             </div>
-            <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Brand Campaign</div>
+            <div class="photo-item">
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024953/p10_ypbsq8.jpg" alt="Campaign Moment">
             </div>
-            <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Vanguard</div>
-            </div>
-            <div class=\"photo-item\">
-                <img src=\"https://images.unsplash.com/photo-1515169067868-5387ec356754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"Work\">
-                <div class=\"photo-overlay\">Solstice</div>
+            <div class="photo-item">
+                <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024997/p13_urzmhq.jpg" alt="Campaign Moment">
             </div>
         </div>
     </section>

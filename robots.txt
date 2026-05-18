@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://promopartnersmarketing.com/sitemap.xml
+
+Disallow: /emailjs-config.js
+Disallow: /.env

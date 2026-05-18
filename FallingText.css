@@ -1,0 +1,25 @@
+.falling-text-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    touch-action: none;
+}
+
+.falling-word {
+    display: inline-block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 700;
+    color: #FFFFFF;
+    white-space: nowrap;
+    will-change: transform;
+    pointer-events: auto;
+}
+
+.falling-word.highlighted {
+    color: #C9A227 !important; /* Gold to match brand color */
+}
+
+.falling-word:active {
+    cursor: grabbing !important;
+}
