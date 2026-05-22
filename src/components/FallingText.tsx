@@ -1,6 +1,32 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
 import './FallingText.css';
+
+interface FallingTextProps {
+  text?: string;
+  highlightWords?: string[];
+  highlightClass?: string;
+  trigger?: 'hover' | 'click' | string;
+  effectStarted?: boolean;
+  gravity?: number;
+  fontSize?: string;
+  backgroundColor?: string;
+  mouseConstraintStiffness?: number;
+  onReset?: (() => void) | null;
+}
+
+interface WordSpan {
+  element: HTMLSpanElement;
+  width: number;
+  initialX: number;
+}
+
+interface MatterBodyWithElement {
+  [key: string]: any;
+  element?: HTMLSpanElement;
+}
 
 export default function FallingText({
   text = '',
@@ -13,9 +39,9 @@ export default function FallingText({
   backgroundColor = 'transparent',
   mouseConstraintStiffness = 0.2,
   onReset = null
-}) {
-  const containerRef = useRef(null);
-  const [elements, setElements] = useState([]);
+}: FallingTextProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [elements, setElements] = useState<WordSpan[]>([]);
   const [physicsActive, setPhysicsActive] = useState(false);
 
   // Sync physics status with effectStarted
@@ -36,7 +62,7 @@ export default function FallingText({
     container.innerHTML = '';
 
     const words = text.split(/\s+/);
-    const wordSpans = [];
+    const wordSpans: WordSpan[] = [];
 
     // Create temp div to measure sizes
     const measureDiv = document.createElement('div');
@@ -49,7 +75,7 @@ export default function FallingText({
     document.body.appendChild(measureDiv);
 
     // Measure each word and accumulate total width
-    const wordWidths = [];
+    const wordWidths: number[] = [];
     let totalWordsWidth = 0;
     const gap = 15;
 
@@ -115,11 +141,11 @@ export default function FallingText({
     const { Engine, World, Bodies, Mouse, MouseConstraint, Runner } = Matter;
 
     const engine = Engine.create({
-      gravity: { x: 0, y: gravity } // Straight down gravity
+      gravity: { x: 0, y: gravity, scale: 0.001 } // Straight down gravity
     });
     const { world } = engine;
 
-    const wordBodies = [];
+    const wordBodies: MatterBodyWithElement[] = [];
 
     // Create boundaries (walls + ground)
     const thickness = 100;
@@ -137,7 +163,7 @@ export default function FallingText({
       const currentX = item.initialX + wordWidth / 2;
       const currentY = (250 - wordHeight) / 2; // Placed at top 250px center
 
-      const body = Bodies.rectangle(currentX, currentY, wordWidth, wordHeight, {
+      const body: MatterBodyWithElement = Bodies.rectangle(currentX, currentY, wordWidth, wordHeight, {
         restitution: 0.5,
         friction: 0.1,
         frictionAir: 0.015,
@@ -159,7 +185,7 @@ export default function FallingText({
         stiffness: mouseConstraintStiffness,
         render: { visible: false }
       }
-    });
+    } as any);
     World.add(world, mouseConstraint);
 
     // Run Engine & Runner
@@ -167,7 +193,7 @@ export default function FallingText({
     Runner.run(runner, engine);
 
     // Update positions Loop
-    let animationId;
+    let animationId: number;
     const update = () => {
       wordBodies.forEach(body => {
         if (body.element) {
@@ -185,7 +211,7 @@ export default function FallingText({
     update();
 
     // Reset option: after 5 seconds of falling, reset back
-    let resetTimeout;
+    let resetTimeout: NodeJS.Timeout;
     if (onReset) {
       resetTimeout = setTimeout(() => {
         onReset();

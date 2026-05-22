@@ -190,12 +190,27 @@ class DomeGallery {
       let radius = basis * this.options.fit;
       const heightGuard = h * 1.35;
       radius = Math.min(radius, heightGuard);
-      radius = clamp(radius, this.options.minRadius, this.options.maxRadius);
+      
+      const responsiveMinRadius = w < 768 ? Math.max(280, Math.min(this.options.minRadius, w * 1.2)) : this.options.minRadius;
+      radius = clamp(radius, responsiveMinRadius, this.options.maxRadius);
       this.lockedRadius = Math.round(radius);
 
       const viewerPad = Math.max(8, Math.round(minDim * this.options.padFactor));
       this.container.style.setProperty('--radius', `${this.lockedRadius}px`);
       this.container.style.setProperty('--viewer-pad', `${viewerPad}px`);
+
+      // Pre-calculate CSS variables in JS to avoid buggy CSS division and unitless division in mobile Safari/Chrome
+      const segments = this.options.segments || 35;
+      const rotY = (360 / segments) / 2;
+      const rotX = (360 / segments) / 2;
+      const circ = this.lockedRadius * 3.14159265;
+      const itemWidth = circ / segments;
+      const itemHeight = circ / segments;
+
+      this.container.style.setProperty('--rot-y', `${rotY}deg`);
+      this.container.style.setProperty('--rot-x', `${rotX}deg`);
+      this.container.style.setProperty('--item-width', `${itemWidth}px`);
+      this.container.style.setProperty('--item-height', `${itemHeight}px`);
 
       this.applyTransform(this.rotation.x, this.rotation.y);
 
@@ -356,6 +371,12 @@ class DomeGallery {
       this.dragging = false;
       this.moved = false;
     });
+
+    this.mainRef.addEventListener('touchmove', (e) => {
+      if (!this.focusedEl && this.dragging) {
+        e.preventDefault();
+      }
+    }, { passive: false });
 
     const close = () => {
       if (performance.now() - this.openStartedAt < 250) return;
@@ -653,3 +674,5 @@ class DomeGallery {
     if (this.btnRight) this.btnRight.style.display = 'none';
   }
 }
+
+export default DomeGallery;

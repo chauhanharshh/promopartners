@@ -44,9 +44,11 @@ main.sphere-main {
   height: 100%;
   display: grid;
   place-items: center;
+  -webkit-perspective: calc(var(--radius) * 2);
   perspective: calc(var(--radius) * 2);
   perspective-origin: 50% 50%;
-  contain: layout paint size;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -55,6 +57,8 @@ main.sphere-main {
 .sphere {
   transform: translateZ(calc(var(--radius) * -1));
   will-change: transform;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -79,6 +83,12 @@ main.sphere-main {
   backdrop-filter: blur(3px);
 }
 
+@media (max-width: 768px) {
+  .overlay--blur {
+    display: none !important;
+  }
+}
+
 .item {
   width: calc(var(--item-width) * var(--item-size-x));
   height: calc(var(--item-height) * var(--item-size-y));
@@ -89,6 +99,9 @@ main.sphere-main {
   right: -999px;
   margin: auto;
   transform-origin: 50% 50%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transition: transform 300ms;
   transform: rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)) + var(--rot-y-delta, 0deg)))
@@ -109,8 +122,6 @@ main.sphere-main {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   pointer-events: auto;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 .item__image:focus {
