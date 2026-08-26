@@ -39,18 +39,19 @@ export default function DomeGalleryWrapper({ images, options, height }: DomeGall
   }, [images, options]);
 
   return (
-    <div 
-      ref={containerRef} 
-      id="dome-gallery-container" 
-      style={{ 
-        width: '100%', 
-        height: height || '800px', 
-        overflow: 'hidden', 
-        border: 'none', 
-        outline: 'none', 
-        boxShadow: 'none', 
-        background: '#F5F0E8' 
-      }} 
+    <div
+      ref={containerRef}
+      id="dome-gallery-container"
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: height || '800px',
+        overflow: 'hidden',
+        border: 'none',
+        outline: 'none',
+        boxShadow: 'none',
+        background: '#F5F0E8'
+      }}
     />
   );
 }

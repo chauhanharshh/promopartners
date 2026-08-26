@@ -69,7 +69,7 @@ export default function FallingText({
     measureDiv.style.position = 'absolute';
     measureDiv.style.visibility = 'hidden';
     measureDiv.style.fontSize = fontSize;
-    measureDiv.style.fontFamily = 'Bebas Neue, sans-serif';
+    measureDiv.style.fontFamily = 'Bricolage Grotesque, sans-serif';
     measureDiv.style.fontWeight = 'bold';
     measureDiv.style.whiteSpace = 'nowrap';
     document.body.appendChild(measureDiv);

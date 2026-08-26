@@ -28,9 +28,12 @@ export default function GlobeWordSphere() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas dimensions
-    canvas.width = 600;
-    canvas.height = 600;
+    let width = globeContainer.clientWidth || 320;
+    let height = globeContainer.clientHeight || 320;
+    
+    // Set initial canvas dimensions
+    canvas.width = width;
+    canvas.height = height;
 
     const words = [
       'BRANDING', 'SEO', 'CAMPAIGNS', 'INFLUENCER',
@@ -40,7 +43,7 @@ export default function GlobeWordSphere() {
       'DIGITAL', 'ADS', 'ROI', 'OUTREACH', 'STORYTELLING'
     ];
 
-    const radius = 260; // Fits inside 600px container gracefully
+    let radius = Math.max(Math.min(width, height) / 2 * 0.85, 100); // Dynamic radius based on container, safeguard against 0
     const elements: ElementItem[] = [];
 
     // Distribute points on a sphere (Fibonacci lattice)
@@ -62,11 +65,12 @@ export default function GlobeWordSphere() {
       const x = Math.cos(theta) * radiusAtY;
       const z = Math.sin(theta) * radiusAtY;
 
+      // Store normalized coordinates, scale by radius during render
       elements.push({
         el: el,
-        x: x * radius,
-        y: y * radius,
-        z: z * radius
+        x: x,
+        y: y,
+        z: z
       });
     });
 
@@ -98,23 +102,32 @@ export default function GlobeWordSphere() {
       const projectedPoints: ProjectedPoint[] = [];
 
       elements.forEach(item => {
+        // Scale normalized vectors by dynamic radius
+        const currentRadius = radius;
+        const ix = item.x * currentRadius;
+        const iy = item.y * currentRadius;
+        const iz = item.z * currentRadius;
+
         // Rotate around Y
-        const x1 = item.x * cosY - item.z * sinY;
-        const z1 = item.z * cosY + item.x * sinY;
-        const y1 = item.y;
+        const x1 = ix * cosY - iz * sinY;
+        const z1 = iz * cosY + ix * sinY;
+        const y1 = iy;
 
         // Rotate around X
         const y2 = y1 * cosX - z1 * sinX;
         const z2 = z1 * cosX + y1 * sinX;
 
         // Map depth to scale, font-size and opacity
-        const scale = (z2 + radius) / (2 * radius); // 0 (back) to 1 (front)
+        const scale = (z2 + currentRadius) / (2 * currentRadius); // 0 (back) to 1 (front)
 
-        const fontSize = 12 + scale * 8; // 12px back, 20px front
+        // Dynamic font size scaling
+        const baseFontSize = width < 500 ? 8 : 12;
+        const maxFontSizeAdd = width < 500 ? 5 : 8;
+        const fontSize = baseFontSize + scale * maxFontSizeAdd; 
         const opacity = 0.3 + scale * 0.7; // 30% back, 100% front
 
-        const px = 300 + x1; // 300 is center of 600px canvas
-        const py = 300 + y2;
+        const px = canvas.width / 2 + x1; 
+        const py = canvas.height / 2 + y2;
 
         projectedPoints.push({
           px, py, z: z2, opacity
@@ -159,6 +172,19 @@ export default function GlobeWordSphere() {
     };
 
     updatePositions();
+
+    const handleResize = () => {
+      width = globeContainer.clientWidth || 320;
+      height = globeContainer.clientHeight || 320;
+      canvas.width = width;
+      canvas.height = height;
+      radius = Math.max(Math.min(width, height) / 2 * 0.85, 100);
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+    resizeObserver.observe(globeContainer);
 
     const handleMouseEnter = () => { isHovered = true; };
     const handleMouseLeave = () => {
@@ -206,6 +232,7 @@ export default function GlobeWordSphere() {
       prevMouseY = e.touches[0].clientY;
     };
 
+    window.addEventListener('resize', handleResize);
     globeContainer.addEventListener('mouseenter', handleMouseEnter);
     globeContainer.addEventListener('mouseleave', handleMouseLeave);
     globeContainer.addEventListener('mousedown', handleMouseDown);
@@ -218,6 +245,8 @@ export default function GlobeWordSphere() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
       globeContainer.removeEventListener('mouseenter', handleMouseEnter);
       globeContainer.removeEventListener('mouseleave', handleMouseLeave);
       globeContainer.removeEventListener('mousedown', handleMouseDown);
@@ -236,8 +265,9 @@ export default function GlobeWordSphere() {
       id="globe-container"
       style={{
         position: 'relative',
-        width: '600px',
-        height: '600px',
+        width: '100%',
+        maxWidth: '600px',
+        aspectRatio: '1 / 1',
         margin: '0 auto',
         perspective: '1000px',
         userSelect: 'none',

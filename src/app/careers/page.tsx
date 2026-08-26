@@ -341,10 +341,10 @@ export default function Careers() {
             <div id="apply-success" style={{ display: 'block', backgroundColor: 'transparent', border: 'none', padding: 0 }} className="form-success">
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', padding: '40px', textAlign: 'center' }}>
                 <div style={{ fontSize: '60px', marginBottom: '20px' }}>🙌</div>
-                <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: '#C9A227', letterSpacing: '3px', marginBottom: '16px' }}>APPLICATION RECEIVED!</h2>
+                <h2 style={{ fontFamily: "'Bricolage Grotesque'", fontSize: '36px', color: '#C9A227', letterSpacing: '3px', marginBottom: '16px' }}>APPLICATION RECEIVED!</h2>
                 <p style={{ color: '#2D3436', fontSize: '16px', lineHeight: '1.6', marginBottom: '12px' }}>Thank you for applying at PromoPartners! Our team will review your application and get back to you within <strong style={{ color: '#C9A227' }}>3-5 working days.</strong></p>
                 <p style={{ color: '#666', fontSize: '13px', marginBottom: '24px' }}>A confirmation email has been sent to your inbox.</p>
-                <div style={{ padding: '16px 24px', border: '1px solid #C9A227', color: '#C9A227', fontFamily: "'Bebas Neue'", letterSpacing: '2px', fontSize: '14px' }}>
+                <div style={{ padding: '16px 24px', border: '1px solid #C9A227', color: '#C9A227', fontFamily: "'Bricolage Grotesque'", letterSpacing: '2px', fontSize: '14px' }}>
                   JAB DIKHEGA TABHI TO BIKEGA 🔥
                 </div>
               </div>
@@ -393,7 +393,7 @@ export default function Careers() {
               </button>
               
               {formError && (
-                <p style={{ color: '#e74c3c', fontSize: '13px', textAlign: 'center', marginTop: '12px', fontFamily: 'Inter, sans-serif' }}>
+                <p style={{ color: '#e74c3c', fontSize: '13px', textAlign: 'center', marginTop: '12px', fontFamily: 'Manrope, sans-serif' }}>
                   {formError}
                 </p>
               )}

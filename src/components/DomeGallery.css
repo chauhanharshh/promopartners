@@ -21,6 +21,7 @@
 .sphere,
 .item,
 .item__image {
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
 
@@ -29,7 +30,7 @@ main.sphere-main {
   inset: 0;
   display: grid;
   place-items: center;
-  overflow: hidden;
+  
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -44,9 +45,9 @@ main.sphere-main {
   height: 100%;
   display: grid;
   place-items: center;
-  -webkit-perspective: calc(var(--radius) * 2);
-  perspective: calc(var(--radius) * 2);
+  /* Perspective is set via JS to avoid calc() bugs in Safari */
   perspective-origin: 50% 50%;
+  -webkit-perspective-origin: 50% 50%;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   border: none !important;
@@ -55,6 +56,8 @@ main.sphere-main {
 }
 
 .sphere {
+  /* Initial transform, overriden by JS applyTransform */
+  -webkit-transform: translateZ(calc(var(--radius) * -1));
   transform: translateZ(calc(var(--radius) * -1));
   will-change: transform;
   -webkit-transform-style: preserve-3d;
@@ -103,9 +106,12 @@ main.sphere-main {
   transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: transform 300ms;
-  transform: rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)) + var(--rot-y-delta, 0deg)))
-    rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)) + var(--rot-x-delta, 0deg)))
+  transition: transform 300ms, -webkit-transform 300ms;
+  -webkit-transform: rotateY(calc(var(--item-rot-y) + var(--rot-y-delta)))
+    rotateX(calc(var(--item-rot-x) + var(--rot-x-delta)))
+    translateZ(var(--radius));
+  transform: rotateY(calc(var(--item-rot-y) + var(--rot-y-delta)))
+    rotateX(calc(var(--item-rot-x) + var(--rot-x-delta)))
     translateZ(var(--radius));
 }
 
@@ -115,9 +121,10 @@ main.sphere-main {
   inset: 10px;
   border-radius: var(--tile-radius, 12px);
   background: transparent;
-  overflow: hidden;
+  
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -135,6 +142,7 @@ main.sphere-main {
   pointer-events: none;
   backface-visibility: hidden;
   filter: var(--image-filter, none);
+  border-radius: var(--tile-radius, 12px);
 }
 
 .viewer {
@@ -182,7 +190,7 @@ main.sphere-main {
   position: absolute;
   z-index: 30;
   border-radius: var(--enlarge-radius, 32px);
-  overflow: hidden;
+  
   transition:
     transform 500ms ease,
     opacity 500ms ease;

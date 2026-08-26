@@ -106,7 +106,12 @@ class DomeGallery {
       }
     }
 
-    return coords.map((c, i) => ({ ...c, src: usedImages[i].src, alt: usedImages[i].alt }));
+    const unit = 360 / this.options.segments / 2;
+    return coords.map((c, i) => {
+      const rotYDeg = unit * (c.x + (c.sizeX - 1) / 2);
+      const rotXDeg = unit * (c.y - (c.sizeY - 1) / 2);
+      return { ...c, src: usedImages[i].src, alt: usedImages[i].alt, rotYDeg, rotXDeg };
+    });
   }
 
   computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, segments) {
@@ -132,7 +137,7 @@ class DomeGallery {
         <div class="stage">
           <div class="sphere">
             ${items.map(it => `
-              <div class="item" data-src="${it.src}" data-offset-x="${it.x}" data-offset-y="${it.y}" data-size-x="${it.sizeX}" data-size-y="${it.sizeY}" style="--offset-x: ${it.x}; --offset-y: ${it.y}; --item-size-x: ${it.sizeX}; --item-size-y: ${it.sizeY}">
+              <div class="item" data-src="${it.src}" data-offset-x="${it.x}" data-offset-y="${it.y}" data-size-x="${it.sizeX}" data-size-y="${it.sizeY}" style="--item-rot-y: ${it.rotYDeg}deg; --item-rot-x: ${it.rotXDeg}deg; --rot-y-delta: 0deg; --rot-x-delta: 0deg; --item-size-x: ${it.sizeX}; --item-size-y: ${it.sizeY}">
                 <div class="item__image" role="button" tabindex="0" aria-label="${it.alt || 'Open image'}">
                   <img src="${it.src}" draggable="false" alt="${it.alt}" />
                 </div>
@@ -156,6 +161,7 @@ class DomeGallery {
     this.container.innerHTML = html;
 
     this.mainRef = this.container.querySelector('.sphere-main');
+    this.stageRef = this.container.querySelector('.stage');
     this.sphereRef = this.container.querySelector('.sphere');
     this.viewerRef = this.container.querySelector('.viewer');
     this.scrimRef = this.container.querySelector('.scrim');
@@ -167,8 +173,9 @@ class DomeGallery {
   }
 
   applyTransform(xDeg, yDeg) {
-    if (this.sphereRef) {
-      this.sphereRef.style.transform = `translateZ(calc(var(--radius) * -1)) rotateX(${xDeg}deg) rotateY(${yDeg}deg)`;
+    if (this.sphereRef && this.lockedRadius) {
+      this.sphereRef.style.webkitTransform = `translateZ(-${this.lockedRadius}px) rotateX(${xDeg}deg) rotateY(${yDeg}deg)`;
+      this.sphereRef.style.transform = `translateZ(-${this.lockedRadius}px) rotateX(${xDeg}deg) rotateY(${yDeg}deg)`;
     }
   }
 
@@ -198,6 +205,11 @@ class DomeGallery {
       const viewerPad = Math.max(8, Math.round(minDim * this.options.padFactor));
       this.container.style.setProperty('--radius', `${this.lockedRadius}px`);
       this.container.style.setProperty('--viewer-pad', `${viewerPad}px`);
+      
+      if (this.stageRef) {
+        this.stageRef.style.webkitPerspective = `${this.lockedRadius * 2}px`;
+        this.stageRef.style.perspective = `${this.lockedRadius * 2}px`;
+      }
 
       // Pre-calculate CSS variables in JS to avoid buggy CSS division and unitless division in mobile Safari/Chrome
       const segments = this.options.segments || 35;

@@ -8,6 +8,7 @@ import FallingText from '../components/FallingText';
 import DomeGalleryWrapper from '../components/DomeGalleryWrapper';
 import GlobeWordSphere from '../components/GlobeWordSphere';
 import TextType from '../components/TextType';
+import ScrollExpand from '../components/ScrollExpand';
 
 const EMAILJS_CONFIG = {
   PUBLIC_KEY: '0imT0R61Bi0txxBez',
@@ -42,10 +43,10 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hideIndicator, setHideIndicator] = useState(false);
   const [isMobileNavActive, setIsMobileNavActive] = useState(false);
-  
+
   // Hero Video States
-  const [videoSrc, setVideoSrc] = useState<string>('');
-  const [videoPoster, setVideoPoster] = useState<string>('https://res.cloudinary.com/dz9pqjbrx/image/upload/v1778786415/hero_wsyip3.png');
+  const [videoSrc, setVideoSrc] = useState<string>('https://res.cloudinary.com/dz9pqjbrx/video/upload/v1787742472/0516_s0ysof_mbdiei.webm');
+  const [videoPoster, setVideoPoster] = useState<string>('https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779024997/p13_urzmhq.jpg');
   const [isMobile, setIsMobile] = useState(false);
 
   const domeGalleryOptions = React.useMemo(() => ({
@@ -58,7 +59,7 @@ export default function Home() {
     imageBorderRadius: '16px',
     openedImageBorderRadius: '20px',
     dragSensitivity: isMobile ? 15 : 20,
-    segments: isMobile ? 18 : 35
+    segments: 35
   }), [isMobile]);
 
   useEffect(() => {
@@ -68,16 +69,16 @@ export default function Home() {
       setVideoSrc(
         mobileCheck
           ? 'https://res.cloudinary.com/dz9pqjbrx/video/upload/q_auto,f_auto/v1779404680/mp__1_aayiwe.mp4'
-          : 'https://res.cloudinary.com/dz9pqjbrx/video/upload/q_auto,f_auto/v1778957925/0516_s0ysof.mp4'
+          : 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1787742472/0516_s0ysof_mbdiei.webm'
       );
-      setVideoPoster('https://res.cloudinary.com/dz9pqjbrx/image/upload/v1778786415/hero_wsyip3.png');
+      setVideoPoster('');
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   // Stats & Results Countup States
   const [stats, setStats] = useState({ clients: 0, activeClients: 0, teamMembers: 0 });
   const [results, setResults] = useState({ reach: 0, impressions: 0, followers: 0, footfall: 0, media: 0, roi: 0 });
@@ -87,7 +88,7 @@ export default function Home() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [formError, setFormError] = useState('');
-  
+
   // Video Modal States
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [activeVideoSrc, setActiveVideoSrc] = useState('');
@@ -118,7 +119,8 @@ export default function Home() {
   // Window scroll interactions
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
+      // The hero section takes up 1 + 1.2 (scrollDistance) + 1.5 (holdDistance) = 3.7 viewport heights
+      const isScrolled = window.scrollY > window.innerHeight * 3.5;
       setScrolled((prev) => {
         if (prev !== isScrolled) return isScrolled;
         return prev;
@@ -270,7 +272,7 @@ export default function Home() {
       const video = otherCard.querySelector('video');
       if (video) {
         if (otherCard === e.currentTarget) {
-          video.play().catch(() => {});
+          video.play().catch(() => { });
         } else {
           video.pause();
         }
@@ -283,7 +285,7 @@ export default function Home() {
     cards.forEach((card) => {
       const video = card.querySelector('video');
       if (video) {
-        video.play().catch(() => {});
+        video.play().catch(() => { });
       }
     });
   };
@@ -351,12 +353,12 @@ export default function Home() {
 
       setFormSubmitted(true);
       setIsSending(false);
-      
+
       // Play left panel success video
       if (contactVideoRef.current) {
         contactVideoRef.current.muted = true;
         contactVideoRef.current.loop = true;
-        contactVideoRef.current.play().catch(() => {});
+        contactVideoRef.current.play().catch(() => { });
       }
     } catch (error) {
       console.log('EmailJS failed:', error);
@@ -398,6 +400,12 @@ export default function Home() {
           <li><a href="#about" onClick={(e) => handleNavClick(e, '#about')}>About</a></li>
           <li><a href="#contact" onClick={(e) => handleNavClick(e, '#contact')}>Contact</a></li>
         </ul>
+        <button
+          className="nav-cta-btn cursor-hover"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Let's Talk
+        </button>
         <button onClick={() => setIsMobileNavActive(true)} className="hamburger-btn cursor-hover" aria-label="Open Navigation">☰</button>
       </nav>
 
@@ -414,55 +422,41 @@ export default function Home() {
         </ul>
       </div>
 
-      <header className="hero hero-video-container">
-        <video 
-          key={videoSrc}
-          id="hero-bg-video" 
-          className="hero-bg-video hero-video" 
-          autoPlay 
-          muted 
-          playsInline 
-          preload="auto"
-          poster={videoPoster || undefined}
+      <header className="hero-scroll-expand-wrapper" style={{ position: 'relative', zIndex: 1, width: '100%', backgroundColor: 'var(--charcoal)' }}>
+        <ScrollExpand
+          mediaType="video"
           src={videoSrc || undefined}
-          style={{
-            objectFit: 'cover',
-            objectPosition: isMobile ? 'center top' : 'center center'
-          }}
-        />
-        <img src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779086737/logo_pypnxk.png" className="hero-watermark" alt="" />
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <p id="hero-subtitle">
-            <TextType 
-              text={TEXT_TYPE_WORDS} 
-              typingSpeed={50} 
-              deletingSpeed={30} 
-              pauseDuration={2000} 
-            />
-          </p>
-          <div className="hero-tagline">SOCH SE STRATEGY TAK SAB YAHIN</div>
-          <h1>PROMOPARTNERS<span className="reg-mark">®</span></h1>
-          <div className="hero-marketing-subtext">MARKETING</div>
-          <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="btn cursor-hover">Let's Work Together</a>
-        </div>
-
-        <div id="hero-scroll-indicator" className={`hero-scroll-indicator cursor-hover ${hideIndicator ? 'hidden' : ''}`}>
-          <div className="scroll-anim-wrapper">
-            <div className="scroll-line"></div>
-            <div className="scroll-diamond">◆</div>
+          poster={videoPoster || undefined}
+          useWindowScroll={true}
+          startWidth={60}
+          startHeight={20}
+          startRadius={100}
+          scrollDistance={1.2}
+          holdDistance={1.5}
+          overlayScrim={0.5}
+          playOnFullExpand={true}
+        >
+          <div className="hero">
+            <div className="hero-content" style={{ opacity: 1, transform: 'none', position: 'relative', zIndex: 10 }}>
+              <p id="hero-subtitle">
+                <TextType
+                  text={TEXT_TYPE_WORDS}
+                  typingSpeed={50}
+                  deletingSpeed={30}
+                  pauseDuration={2000}
+                />
+              </p>
+              <div className="hero-tagline">SOCH SE STRATEGY TAK SAB YAHIN</div>
+              <h1>PROMOPARTNERS<span className="reg-mark">®</span></h1>
+              <div className="hero-marketing-subtext">MARKETING</div>
+              <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="btn cursor-hover">Let's Work Together</a>
+            </div>
           </div>
-          <div className="scroll-text">SCROLL</div>
-        </div>
+        </ScrollExpand>
       </header>
 
       <section id="about" className="about-intro">
-        <img 
-          src="https://res.cloudinary.com/dz9pqjbrx/image/upload/v1779086737/logo_pypnxk.png" 
-          alt="PromoPartners Logo" 
-          loading="lazy"
-          style={{ maxWidth: '80px', margin: '0 auto 20px auto', display: 'block', filter: 'brightness(0) opacity(0.8)' }} 
-        />
+
         <ScrollFloat>A Modern Approach to a New Age of Marketing</ScrollFloat>
         <p className="about-intro-text">
           Promopartners India is a dynamic digital marketing and brand promotion agency committed to helping
@@ -544,72 +538,72 @@ export default function Home() {
       </section>
 
       {/* Seamless Beige Section Wrapper */}
-      <div 
+      <div
         className="beige-flow-wrapper"
         style={{
-          backgroundColor: '#F5F0E8', 
-          width: '100%', 
-          position: 'relative', 
-          zIndex: 2, 
-          border: 'none', 
-          outline: 'none', 
-          boxShadow: 'none', 
-          margin: 0, 
-          padding: 0, 
-          marginTop: '-60px', 
+          backgroundColor: '#F5F0E8',
+          width: '100%',
+          position: 'relative',
+          zIndex: 2,
+          border: 'none',
+          outline: 'none',
+          boxShadow: 'none',
+          margin: 0,
+          padding: 0,
+          marginTop: '-60px',
           clipPath: 'polygon(0 60px, 100% 0, 100% 100%, 0 100%)'
         }}
       >
-        <section 
+        <section
           id="work"
           style={{
-            width: '100%', 
-            height: isMobile ? '450px' : '950px', 
-            background: '#F5F0E8', 
-            position: 'relative', 
-            overflow: 'hidden', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-            margin: 0, 
-            padding: 0, 
-            border: 'none', 
-            outline: 'none', 
+            width: '100%',
+            height: isMobile ? '450px' : '950px',
+            background: '#F5F0E8',
+            position: 'relative',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            margin: 0,
+            padding: 0,
+            border: 'none',
+            outline: 'none',
             boxShadow: 'none'
           }}
         >
           <div style={{ textAlign: 'center', paddingTop: isMobile ? '40px' : '100px', paddingBottom: '20px', position: 'relative', zIndex: 10 }}>
-            <p style={{ 
-              fontFamily: "'Bebas Neue', var(--font-inter)", 
-              fontSize: isMobile ? '10px' : '13px', 
-              letterSpacing: isMobile ? '2px' : '4px', 
-              color: '#C9A227', 
-              marginBottom: '8px' 
+            <p style={{
+              fontFamily: "'Bricolage Grotesque', var(--font-inter)",
+              fontSize: isMobile ? '10px' : '13px',
+              letterSpacing: isMobile ? '2px' : '4px',
+              color: '#C9A227',
+              marginBottom: '8px'
             }}>
               BEHIND THE LENS
             </p>
-            <h2 style={{ 
-              fontFamily: 'var(--font-dm-serif)', 
-              fontSize: isMobile ? '32px' : '52px', 
-              fontStyle: 'italic', 
-              color: '#2D3436', 
-              margin: 0 
+            <h2 style={{
+              fontFamily: 'var(--font-dm-serif)',
+              fontSize: isMobile ? '32px' : '52px',
+              fontStyle: 'italic',
+              color: '#2D3436',
+              margin: 0
             }}>
               "ICONIC"
             </h2>
-            <p style={{ 
-              fontFamily: "'Bebas Neue', var(--font-inter)", 
-              fontSize: isMobile ? '10px' : '13px', 
-              letterSpacing: isMobile ? '3px' : '6px', 
-              color: '#2D3436', 
-              marginTop: '8px' 
+            <p style={{
+              fontFamily: "'Bricolage Grotesque', var(--font-inter)",
+              fontSize: isMobile ? '10px' : '13px',
+              letterSpacing: isMobile ? '3px' : '6px',
+              color: '#2D3436',
+              marginTop: '8px'
             }}>
               MOMENTS
             </p>
           </div>
-          
-          <DomeGalleryWrapper 
-            images={promoImages} 
+
+          <DomeGalleryWrapper
+            images={promoImages}
             options={domeGalleryOptions}
             height={isMobile ? '350px' : '800px'}
           />
@@ -619,21 +613,21 @@ export default function Home() {
           <div className="section-header">
             <ScrollFloat>WORK THAT SPEAKS</ScrollFloat>
           </div>
-          
+
           <div className="portrait-cards-container">
             {/* Card 1 */}
-            <a 
-              href="#" 
-              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778947931/IMG_0440_ns2aqf.mov')} 
-              onMouseEnter={handlePortraitCardMouseEnter} 
-              onMouseLeave={handlePortraitCardMouseLeave} 
+            <a
+              href="#"
+              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778947931/IMG_0440_ns2aqf.mov')}
+              onMouseEnter={handlePortraitCardMouseEnter}
+              onMouseLeave={handlePortraitCardMouseLeave}
               className="portrait-card"
             >
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
                 preload="metadata"
                 poster="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778947931/IMG_0440_ns2aqf.jpg"
                 src="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778947931/IMG_0440_ns2aqf.mov"
@@ -646,18 +640,18 @@ export default function Home() {
             </a>
 
             {/* Card 2 */}
-            <a 
-              href="#" 
-              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778951897/IMG_0439_mhgr4i.mov')} 
-              onMouseEnter={handlePortraitCardMouseEnter} 
-              onMouseLeave={handlePortraitCardMouseLeave} 
+            <a
+              href="#"
+              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778951897/IMG_0439_mhgr4i.mov')}
+              onMouseEnter={handlePortraitCardMouseEnter}
+              onMouseLeave={handlePortraitCardMouseLeave}
               className="portrait-card"
             >
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
                 preload="metadata"
                 poster="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778951897/IMG_0439_mhgr4i.jpg"
                 src="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778951897/IMG_0439_mhgr4i.mov"
@@ -670,18 +664,18 @@ export default function Home() {
             </a>
 
             {/* Card 3 */}
-            <a 
-              href="#" 
-              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952260/IMG_0437_xmfxiy.mov')} 
-              onMouseEnter={handlePortraitCardMouseEnter} 
-              onMouseLeave={handlePortraitCardMouseLeave} 
+            <a
+              href="#"
+              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952260/IMG_0437_xmfxiy.mov')}
+              onMouseEnter={handlePortraitCardMouseEnter}
+              onMouseLeave={handlePortraitCardMouseLeave}
               className="portrait-card"
             >
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
                 preload="metadata"
                 poster="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952260/IMG_0437_xmfxiy.jpg"
                 src="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952260/IMG_0437_xmfxiy.mov"
@@ -694,18 +688,18 @@ export default function Home() {
             </a>
 
             {/* Card 4 */}
-            <a 
-              href="#" 
-              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952339/IMG_0438_du2cm0.mov')} 
-              onMouseEnter={handlePortraitCardMouseEnter} 
-              onMouseLeave={handlePortraitCardMouseLeave} 
+            <a
+              href="#"
+              onClick={(e) => handlePortraitCardClick(e, 'https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952339/IMG_0438_du2cm0.mov')}
+              onMouseEnter={handlePortraitCardMouseEnter}
+              onMouseLeave={handlePortraitCardMouseLeave}
               className="portrait-card"
             >
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
                 preload="metadata"
                 poster="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952339/IMG_0438_du2cm0.jpg"
                 src="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778952339/IMG_0438_du2cm0.mov"
@@ -783,8 +777,8 @@ export default function Home() {
       </section>
 
       <section id="contact" className="cta-section">
-        <FallingText 
-          text="READY TO ELEVATE ?" 
+        <FallingText
+          text="READY TO ELEVATE ?"
           highlightWords={FALLING_TEXT_HIGHLIGHT}
           fontSize={isMobile ? "clamp(1.8rem, 7vw, 3rem)" : "clamp(2.5rem, 6vw, 5rem)"}
           backgroundColor="transparent"
@@ -853,47 +847,54 @@ export default function Home() {
         </div>
       </section>
 
-      <footer>
-        <div className="footer-grid">
-          <div className="footer-logo-area">
-            <div className="footer-logo">PROMO<span>PARTNERS</span><span className="reg-mark">®</span></div>
-            <div className="footer-logo-subtext">MARKETING</div>
-            <div className="footer-social">
-              <a href="https://www.instagram.com/promopartnersads" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="cursor-hover">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-              <a href="https://wa.me/917668191106" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="cursor-hover">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                </svg>
-              </a>
-              <a href="mailto:info@promopartnersmarketing.com" aria-label="Email" className="cursor-hover">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-              </a>
+      <footer className="mega-footer">
+        <div className="mega-footer-top">
+          <div className="mega-footer-left">
+            <div className="mega-footer-media">
+              <video
+                autoPlay muted loop playsInline
+                src="https://res.cloudinary.com/dz9pqjbrx/video/upload/v1778947931/IMG_0440_ns2aqf.mov"
+              />
+            </div>
+            <div className="mega-footer-contact-row">
+              <div className="stay-connected">
+                <span className="dot"></span> Stay connected
+              </div>
+              <a href="mailto:info@promopartnersmarketing.com" className="mega-email cursor-hover">info@promopartnersmarketing.com</a>
             </div>
           </div>
-
-          <div className="footer-nav">
-            <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className="cursor-hover">About</a>
-            <a href="#services" onClick={(e) => handleNavClick(e, '#services')} className="cursor-hover">Services</a>
-            <a href="#work" onClick={(e) => handleNavClick(e, '#work')} className="cursor-hover">Work</a>
-            <a href="/careers/" className="cursor-hover">Careers</a>
-            <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="cursor-hover">Contact</a>
+          <div className="mega-footer-right">
+            <div className="mega-footer-col">
+              <h4>Navigation</h4>
+              <a href="#" onClick={(e) => handleNavClick(e, '#')} className="cursor-hover mega-link">Home</a>
+              <a href="#services" onClick={(e) => handleNavClick(e, '#services')} className="cursor-hover mega-link">Services</a>
+              <a href="#work" onClick={(e) => handleNavClick(e, '#work')} className="cursor-hover mega-link">Work</a>
+              <a href="/careers/" className="cursor-hover mega-link">Careers</a>
+              <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className="cursor-hover mega-link">About</a>
+            </div>
+            <div className="mega-footer-col">
+              <h4>Social Media</h4>
+              <a href="https://www.instagram.com/promopartnersads" target="_blank" rel="noopener noreferrer" className="cursor-hover mega-link">Instagram</a>
+              <a href="https://wa.me/917668191106" target="_blank" rel="noopener noreferrer" className="cursor-hover mega-link">WhatsApp</a>
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="cursor-hover mega-link">Facebook</a>
+            </div>
           </div>
+        </div>
 
-          <div className="footer-contact">
-            <a href="mailto:info@promopartnersmarketing.com" className="cursor-hover">info@promopartnersmarketing.com</a><br />
-            <a href="tel:+917668191106" className="cursor-hover">+91 7668191106</a> / <a href="tel:+918755746566" className="cursor-hover">+91 8755746566</a> | <a href="https://wa.me/917668191106" target="_blank" rel="noopener noreferrer" className="cursor-hover">WhatsApp</a><br />
-            <a href="https://www.instagram.com/promopartnersads" target="_blank" rel="noopener noreferrer" className="cursor-hover">@promopartnersads</a><br />
-            Haridwar, Uttarakhand — Pan India Available
+        <div className="mega-footer-middle">
+          <div className="copyright">©2025 PromoPartners Marketing. All Rights Reserved</div>
+          <div className="legal-links">
+            <a href="#" className="cursor-hover">Terms of Use</a>
+            <a href="#" className="cursor-hover">Privacy Policy</a>
           </div>
+        </div>
+
+        <div className="mega-footer-bottom">
+          <div className="mega-text-marquee">
+            <span>PROMOPARTNERS MARKETING • </span>
+            <span>PROMOPARTNERS MARKETING • </span>
+          </div>
+          <div className="mega-footer-blur"></div>
         </div>
       </footer>
 
@@ -903,12 +904,12 @@ export default function Home() {
           <button onClick={() => setIsModalOpen(false)} className="modal-close cursor-hover" aria-label="Close Modal">&times;</button>
 
           <div className="modal-left">
-            <video 
-              ref={contactVideoRef} 
-              id="modal-left-video" 
-              muted 
-              loop 
-              playsInline 
+            <video
+              ref={contactVideoRef}
+              id="modal-left-video"
+              muted
+              loop
+              playsInline
               preload="auto"
               poster="https://res.cloudinary.com/dz9pqjbrx/image/upload/q_auto/f_auto/v1778873766/p12_ki5tql.png"
             >
@@ -962,10 +963,10 @@ export default function Home() {
                         'Photoshoots & Videoshoots'
                       ].map((service) => (
                         <label key={service} className="checkbox-label cursor-hover">
-                          <input 
-                            type="checkbox" 
-                            checked={selectedServices.includes(service)} 
-                            onChange={() => handleCheckboxChange(service)} 
+                          <input
+                            type="checkbox"
+                            checked={selectedServices.includes(service)}
+                            onChange={() => handleCheckboxChange(service)}
                           />
                           <div className="custom-checkbox"></div>
                           {service}
@@ -979,9 +980,9 @@ export default function Home() {
                     <textarea id="pp-msg" value={message} onChange={(e) => setMessage(e.target.value)} rows={4} placeholder="Your Message"></textarea>
                   </div>
 
-                  <button 
-                    type="button" 
-                    id="pp-submit-btn" 
+                  <button
+                    type="button"
+                    id="pp-submit-btn"
                     onClick={submitContactForm}
                     disabled={isSending}
                     className={`submit-btn cursor-hover ${isSending ? 'btn-sending' : ''}`}
@@ -989,7 +990,7 @@ export default function Home() {
                     {isSending ? 'SENDING...' : 'GET STARTED'}
                   </button>
                   {formError && (
-                    <p style={{ color: '#e74c3c', fontSize: '12px', textAlign: 'center', marginTop: '10px', fontFamily: 'Inter, sans-serif' }}>
+                    <p style={{ color: '#e74c3c', fontSize: '12px', textAlign: 'center', marginTop: '10px', fontFamily: 'Manrope, sans-serif' }}>
                       {formError}
                     </p>
                   )}
@@ -998,10 +999,10 @@ export default function Home() {
             ) : (
               <div id="pp-success" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', padding: '40px', textAlign: 'center' }}>
                 <div style={{ fontSize: '60px', marginBottom: '20px' }}>🎉</div>
-                <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: '#C9A227', letterSpacing: '3px', marginBottom: '16px' }}>THANK YOU!</h2>
+                <h2 style={{ fontFamily: "'Bricolage Grotesque'", fontSize: '36px', color: '#C9A227', letterSpacing: '3px', marginBottom: '16px' }}>THANK YOU!</h2>
                 <p style={{ color: '#ffffff', fontSize: '16px', lineHeight: '1.6', marginBottom: '12px' }}>We've received your inquiry and will get back to you within <strong style={{ color: '#C9A227' }}>24 hours.</strong></p>
                 <p style={{ color: '#aaaaaa', fontSize: '13px' }}>A confirmation email has been sent to your inbox.</p>
-                <div style={{ marginTop: '30px', padding: '16px 24px', border: '1px solid #C9A227', color: '#C9A227', fontFamily: "'Bebas Neue'", letterSpacing: '2px', fontSize: '14px' }}>
+                <div style={{ marginTop: '30px', padding: '16px 24px', border: '1px solid #C9A227', color: '#C9A227', fontFamily: "'Bricolage Grotesque'", letterSpacing: '2px', fontSize: '14px' }}>
                   📸 @promopartnersads &nbsp;|&nbsp; 📞 +91 7668191106 / +91 8755746566
                 </div>
               </div>
