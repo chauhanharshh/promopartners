@@ -434,7 +434,8 @@ export default function Home() {
           scrollDistance={1.2}
           holdDistance={1.5}
           overlayScrim={0.5}
-          playOnFullExpand={true}
+          playOnFullExpand={false}
+          loop={true}
         >
           <div className="hero">
             <div className="hero-content" style={{ opacity: 1, transform: 'none', position: 'relative', zIndex: 10 }}>
